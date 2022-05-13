@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik,Form,Field } from 'formik';
+import { Formik,Form,Field,ErrorMessage } from 'formik';
 import * as Yup from 'yup'; 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/auth/slice';
@@ -27,24 +27,16 @@ function Register() {
                 ({errors,touched}) => (
                     <Form>
                         <Field type="firstName" name="firstName" placeholder="First Name"/>
-                        {errors.firstName? (
-                        <div>{errors.firstName}</div>
-                        ) : null}
+                        <ErrorMessage name="firstName">{msg=> <div>{msg}</div>}</ErrorMessage>
                         <br />
                         <Field type="lastName" name="lastName" placeholder="Last Name"/>
-                        {errors.lastName? (
-                        <div>{errors.lastName}</div>
-                        ) : null}
+                        <ErrorMessage name="lastName">{msg=> <div>{msg}</div>}</ErrorMessage>
                         <br />
                         <Field type="email" name="email" placeholder="Email"/>
-                        {errors.email && touched.email ? (
-                        <div>{errors.email}</div>
-                        ) : null}
+                        <ErrorMessage name="email">{msg=> <div>{msg}</div>}</ErrorMessage>
                         <br />
                         <Field type="password" name="password" placeholder="Password"/>
-                        {errors.password && touched.password ? (
-                        <div>{errors.password}</div>
-                        ) : null}
+                        <ErrorMessage name="password">{msg=> <div>{msg}</div>}</ErrorMessage>
                         <br />
                         <button type="submit">Submit!</button>
                     </Form>
