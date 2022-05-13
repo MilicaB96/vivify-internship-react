@@ -2,7 +2,8 @@ import React from 'react';
 import { Formik,Form,Field,ErrorMessage } from 'formik';
 import * as Yup from 'yup'; 
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store/auth/slice';
+// import { setUser } from '../store/auth/slice';
+import {setUser} from "./../redux/actions/auth"
 
 function Register() {
     const dispatch = useDispatch();
