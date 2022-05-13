@@ -1,8 +1,11 @@
 import React from 'react';
 import { Formik,Form,Field } from 'formik';
 import * as Yup from 'yup'; 
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/auth/slice';
 
 function Register() {
+    const dispatch = useDispatch();
     const registerSchema = Yup.object().shape({
         firstName: Yup.string().required('Required').min(2,"First Name must be at least two charcters long").max(255,"First Name too long"),
         lastName: Yup.string().required('Required').min(2,"Last Name must be at least two charcters long").max(255,"Last Name too long"),
@@ -16,20 +19,20 @@ function Register() {
             {firstName: '', lastName: '',email: '',password: ''}
         }
         validationSchema = {registerSchema}
-        onSubmit = {(values) => {setTimeout(() => {
-            console.log(values);
-        }, 200);}}
+        onSubmit = {(values) => 
+            dispatch(setUser(values))
+        }
         >
             {
                 ({errors,touched}) => (
                     <Form>
                         <Field type="firstName" name="firstName" placeholder="First Name"/>
-                        {errors.firstName && touched.firstName ? (
+                        {errors.firstName? (
                         <div>{errors.firstName}</div>
                         ) : null}
                         <br />
                         <Field type="lastName" name="lastName" placeholder="Last Name"/>
-                        {errors.lastName && touched.lastName ? (
+                        {errors.lastName? (
                         <div>{errors.lastName}</div>
                         ) : null}
                         <br />
@@ -50,5 +53,5 @@ function Register() {
         </Formik>
     </div> );
 }
-
+ 
 export default Register;
